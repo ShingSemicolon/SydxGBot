@@ -9,7 +9,7 @@ module.exports = async(client) => {
        }
     })
 const mongoose = require('mongoose');
-await mongoose.connect('mongodb+srv://SydxGBot:'+process.env.MONGOOSE+'@cluster0.w5hhj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+await mongoose.connect(process.env.MONGOOSE, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
