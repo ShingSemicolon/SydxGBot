@@ -1,0 +1,29 @@
+{
+  "name": "SydxGBot-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "canvas": "^2.8.0",
+    "common-tags": "^1.8.0",
+    "dblapi.js": "^2.4.1",
+    "discord-buttons": "^2.4.1",
+    "discord.js": "^12.5.3",
+    "express": "^4.17.1",
+    "ffmpeg-static": "^4.4.0",
+    "mongoose": "^5.12.14",
+    "ms": "^2.1.3",
+    "node-os-utils": "^1.3.5",
+    "opusscript": "0.0.8",
+    "os-utils": "0.0.14",
+    "quick.db": "^7.1.3",
+    "ytdl-core": "^4.8.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
