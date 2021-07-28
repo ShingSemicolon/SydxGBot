@@ -2,7 +2,7 @@ module.exports = async(client) => {
   try {
 
   client.user.setPresence({
-
+stauts:"idle",
        activity: {
            name: "&duel",
            type: "COMPETING"

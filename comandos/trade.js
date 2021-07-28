@@ -2,10 +2,7 @@ let tradePending = []
 module.exports = {
   cooldown:5,
  async execute(client, message, args, db, economy, MESSAGES_JSON, LANG) {
-
-  
-    if(!tradePending[0]){
-      console.log(tradePending[0])
+    if(!tradePending.has(`author_${message.author.id}`)){
 let user = message.mentions.users.first()
  if(!user) return message.channel.send("!user")
  message.channel.send("Acepta=D").then(msg => {
@@ -31,7 +28,6 @@ return message.channel.send("Ah rechazaste? :(")
 })
 
     }else{
-       if(!args[0]) return message.channel.send("Introduce un argumento (money)")
 if(args[0].toLowerCase() === "money"){
 
 let number = parseInt(args[2])
@@ -39,7 +35,7 @@ if(isNaN(number)) return message.channel.send("Uso: trade money add o remove")
 if(!args[2]) return message.channel.send("Agrega una cantidad de dinero")
 let money = tradePending.push(`author_${message.author.id}`) || 0
 if(args[1].toLowerCase() === "add"){
-  money += number
+  money + number
 if(tradePending.get(`author_${message.author.id}`) === message.author.id) tradePending.set(`author_${message.author.id}`,{money: money})
 if(tradePending.get(`user_${message.author.id}`) === message.author.id) tradePending.set(`author_${message.author.id}`,{money: money})
 

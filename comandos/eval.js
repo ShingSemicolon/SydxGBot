@@ -13,7 +13,7 @@ function ms(s) {
   var mins = s % 60;
   s = (s - mins) / 60;
   var hrs = s % 24
-return hrs + ':' + mins + ':' + secs + '.' + ms;
+return hrs + ' dias ' + mins + ' minutos ' + secs + ' segundos';
 
 }
 

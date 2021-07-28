@@ -53,7 +53,7 @@ let LANG = lan ? lan.lang : "ES"
    
 if (!message.channel.permissionsFor(message.guild.me).has("EMBED_LINKS")) return message.channel.send("Opps...!\n"+MESSAGES_JSON["ES"].MESSAGE_EMBED_PERMISSION)
 	const commandName = args.shift().toLowerCase();
-console.log(commandName)
+
 	const cmd = client.comandos.get(commandName)
 		|| client.comandos.find(cmd => cmd.aliases && cmd.aliases.includes(commandName)) 
   
