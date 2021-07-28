@@ -19,7 +19,7 @@ message.channel.send("Aceptaste :wink: =D")
 console.log(tradePending)
 
 tradePending.push({author:{user: message.author.id}})
- tradePending.push({mention:{user: user.id}})
+ tradePending.push({author:{user: user.id}})
  } 
  if(reaction.emoji.name === "❎"){
 return message.channel.send("Ah rechazaste? :(")
@@ -28,31 +28,42 @@ return message.channel.send("Ah rechazaste? :(")
 })
 
     }else{
+      
 if(args[0].toLowerCase() === "money"){
 
 let number = parseInt(args[2])
 if(isNaN(number)) return message.channel.send("Uso: trade money add o remove")
 if(!args[2]) return message.channel.send("Agrega una cantidad de dinero")
-let money = tradePending.push(`author_${message.author.id}`) || 0
-if(args[1].toLowerCase() === "add"){
-  money + number
-if(tradePending.get(`author_${message.author.id}`) === message.author.id) tradePending.set(`author_${message.author.id}`,{money: money})
-if(tradePending.get(`user_${message.author.id}`) === message.author.id) tradePending.set(`author_${message.author.id}`,{money: money})
+let totalMoney;
+if(!tradePending[0].author.money){
+  tradePending[0].author.money = 0
+} else if(!tradePending[1].author.money){
+  tradePending[1].author.money = 0
+}
 
-message.channel.send("Se agregó "+number+" de dinero")
+if(args[1].toLowerCase() === "add"){
+ 
+if(tradePending[0].author.user === message.author.id) {
+  totalMoney = tradePending[0].author.money + number
+tradePending[0].author.money = totalMoney
+}
+if(tradePending[1].author.user === message.author.id) {
+ totalMoney = tradePending[1].author.money + number
+tradePending[1].author.money = totalMoney
+}
+message.channel.send("Se agregó "+totalMoney+" de dinero")
 }
 if(args[1].toLowerCase() === "remove"){
-  money - number
-if(tradePending.get(`author_${message.author.id}`) === message.author.id) tradePending.set(`author_${message.author.id}`,{money: money})
-if(tradePending.get(`user_${message.author.id}`) === message.author.id) tradePending.set(`author_${message.author.id}`,{money: money})
-
-message.channel.send("Se removió "+number+" de dinero")
-  }
+if(tradePending[0].author.user === message.author.id) {
+  totalMoney = tradePending[0].author.money - number
+tradePending[0].author.money = totalMoney
 }
-
-  
-if(!tradePending.get(`author_${message.author.id}`) || tradePending.get(`user_${tradePending.get(`author_${message.author.id}`).trade}`)) return message.channel.send("No estas en el tradeo!")
-if(args[0].toLowerCase() === "confirm"){
+if(tradePending[1].author.user === message.author.id) {
+ totalMoney = tradePending[1].author.money - number
+tradePending[1].author.money = totalMoney
+}message.channel.send("Se removió "+number+" de dinero")
+  }
+} else if(args[0].toLowerCase() === "confirm"){
 message.channel.send("Confirmaste el intercambio")
 tradePending.delete(`author_${message.author.id}`)
 tradePending.delete(`user_${tradePending.get(`author_${message.author.id}`).trade}`)
@@ -61,6 +72,8 @@ if(args[0].toLowerCase() === "deny"){
 message.channel.send("Rechazo el tradeo :(")
 tradePending.delete(`author_${message.author.id}`)
 tradePending.delete(`user_${tradePending.get(`author_${message.author.id}`).trade}`)
+} else {
+  if(tradePending[0].author.user !== message.author.id || tradePending[1].author.user !== message.author.id) return message.channel.send("No estas en el tradeo!")
 }
    
   
