@@ -2,7 +2,7 @@ let tradePending = []
 module.exports = {
   cooldown:5,
  async execute(client, message, args, db, economy, MESSAGES_JSON, LANG) {
-    if(!tradePending.has(`author_${message.author.id}`)){
+    if(!tradePending[0]){
 let user = message.mentions.users.first()
  if(!user) return message.channel.send("!user")
  message.channel.send("Acepta=D").then(msg => {
@@ -65,13 +65,11 @@ tradePending[1].author.money = totalMoney
   }
 } else if(args[0].toLowerCase() === "confirm"){
 message.channel.send("Confirmaste el intercambio")
-tradePending.delete(`author_${message.author.id}`)
-tradePending.delete(`user_${tradePending.get(`author_${message.author.id}`).trade}`)
+tradePending = []
 }
 if(args[0].toLowerCase() === "deny"){
 message.channel.send("Rechazo el tradeo :(")
-tradePending.delete(`author_${message.author.id}`)
-tradePending.delete(`user_${tradePending.get(`author_${message.author.id}`).trade}`)
+tradePending = []
 } else {
   if(tradePending[0].author.user !== message.author.id || tradePending[1].author.user !== message.author.id) return message.channel.send("No estas en el tradeo!")
 }
